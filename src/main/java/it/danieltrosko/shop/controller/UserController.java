@@ -6,12 +6,13 @@ import it.danieltrosko.shop.model.User;
 import it.danieltrosko.shop.service.AddressService;
 import it.danieltrosko.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.sql.SQLException;
 
 import static it.danieltrosko.shop.mapper.UserMapper.toDTO;
 
@@ -26,7 +27,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/adduser", method = RequestMethod.GET)
     public String adduser(Model model) {
         model.addAttribute("UserDTO", new UserDTO());
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/user")
-    public String createUser(@Valid @ModelAttribute("UserDTO") UserDTO userDTO, Model model) {
+    public String createUser(@Valid @ModelAttribute("UserDTO") UserDTO userDTO, Model model) throws SQLException {
 
         if (userDTO.getId() == null) {
             this.userService.createUser(userDTO);

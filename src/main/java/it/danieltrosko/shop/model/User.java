@@ -14,9 +14,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> role;
     @NotBlank
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -37,17 +34,14 @@ public class User {
     @JoinColumn(name = "user_address_id", nullable = false)
     @NotNull
     private Adress adress;
+    @NotNull
+    @Column(name = "enabled")
+    private boolean enabled;
+    @ManyToOne
+    @JoinColumn(name = "user_authorities_id")
+    @NotNull
+    private Authorities authorities;
 
-    public User(User user) {
-        this.id = user.getId();
-        this.role = user.getRole();
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.name = user.getName();
-        this.surname = user.getSurname();
-        this.email = user.getEmail();
-        this.adress = user.getAdress();
-    }
 
     public User() {
     }
@@ -60,13 +54,6 @@ public class User {
         this.id = id;
     }
 
-    public Set<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<Role> role) {
-        this.role = role;
-    }
 
     public String getUsername() {
         return username;
@@ -114,5 +101,21 @@ public class User {
 
     public void setAdress(Adress adress) {
         this.adress = adress;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = true;
+    }
+
+    public Authorities getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Authorities authorities) {
+        this.authorities = authorities;
     }
 }

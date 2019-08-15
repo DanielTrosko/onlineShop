@@ -11,6 +11,8 @@
     <form:form method="POST"
                action="/user" modelAttribute="UserDTO">
         <form:input class="form-control" path="id" hidden="true"/>
+        <form:input class="form-control" path="usernamev" hidden="true"/>
+        <form:input class="form-control" path="authority" hidden="true"/>
 
         <div class="form-group">
             <form:label path="username">Username</form:label>

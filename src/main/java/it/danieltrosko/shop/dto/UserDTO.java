@@ -1,15 +1,11 @@
 package it.danieltrosko.shop.dto;
 
-import it.danieltrosko.shop.model.Role;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 public class UserDTO {
     private Long id;
-    @NotEmpty
-    private Set<Role> role;
     @NotEmpty
     private String username;
     @NotEmpty
@@ -29,6 +25,11 @@ public class UserDTO {
     @NotEmpty
     private String houseNumber;
     private String appartmentNumber;
+    private boolean enabled;
+
+    private Long authoritiesId;
+    private String usernamev;
+    private String authority;
 
     public Long getId() {
         return id;
@@ -36,14 +37,6 @@ public class UserDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<Role> role) {
-        this.role = role;
     }
 
     public String getUsername() {
@@ -126,4 +119,35 @@ public class UserDTO {
         this.appartmentNumber = appartmentNumber;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Long getAuthoritiesId() {
+        return authoritiesId;
+    }
+
+    public void setAuthoritiesId(Long authoritiesId) {
+        this.authoritiesId = authoritiesId;
+    }
+
+    public String getUsernamev() {
+        return usernamev;
+    }
+
+    public void setUsernamev(String usernamev) {
+        this.usernamev = usernamev;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
 }

@@ -1,12 +1,16 @@
 package it.danieltrosko.shop.service;
 
 import it.danieltrosko.shop.dto.UserDTO;
+import it.danieltrosko.shop.model.Authorities;
 import it.danieltrosko.shop.model.User;
+import it.danieltrosko.shop.repository.AuthoritiesRepository;
 import it.danieltrosko.shop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import static it.danieltrosko.shop.mapper.UserMapper.toEntity;
@@ -16,6 +20,7 @@ public class UserService {
     private UserRepository userRepository;
 
     private AddressService addressService;
+    private AuthoritiesRepository authoritiesRepository;
 
     @Autowired
     public UserService(UserRepository userRepository, AddressService addressService) {
@@ -24,8 +29,12 @@ public class UserService {
     }
 
     @Transactional(readOnly = false)
-    public void createUser(UserDTO userDTO) {
+    public void createUser(UserDTO userDTO){
         User user = toEntity(userDTO);
+        String password = user.getPassword();
+        password = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(password);
+        authoritiesRepository.save(user.getAuthorities());
         addressService.save(user.getAdress());
         userRepository.save(user);
     }
