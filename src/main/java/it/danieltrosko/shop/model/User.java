@@ -37,10 +37,6 @@ public class User {
     @NotNull
     @Column(name = "enabled")
     private boolean enabled;
-    @ManyToOne
-    @JoinColumn(name = "user_authorities_id")
-    @NotNull
-    private Authorities authorities;
 
 
     public User() {
@@ -111,11 +107,4 @@ public class User {
         this.enabled = true;
     }
 
-    public Authorities getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Authorities authorities) {
-        this.authorities = authorities;
-    }
 }

@@ -6,6 +6,7 @@ import it.danieltrosko.shop.model.User;
 import it.danieltrosko.shop.service.AddressService;
 import it.danieltrosko.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/adduser", method = RequestMethod.GET)
     public String adduser(Model model) {
         model.addAttribute("UserDTO", new UserDTO());

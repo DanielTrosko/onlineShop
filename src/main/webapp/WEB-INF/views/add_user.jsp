@@ -11,19 +11,17 @@
     <form:form method="POST"
                action="/user" modelAttribute="UserDTO">
         <form:input class="form-control" path="id" hidden="true"/>
-        <form:input class="form-control" path="usernamev" hidden="true"/>
-        <form:input class="form-control" path="authority" hidden="true"/>
 
         <div class="form-group">
             <form:label path="username">Username</form:label>
             <form:input class="form-control" path="username" required="true"/>
         </div>
         <div class="form-group">
-            <form:label path="password">password</form:label>
+            <form:label path="password">Password</form:label>
             <form:input class="form-control" path="password" required="true"/>
         </div>
         <div class="form-group">
-            <form:label path="name">name</form:label>
+            <form:label path="name">Name</form:label>
             <form:input class="form-control" path="name" required="true"/>
         </div>
         <div class="form-group">

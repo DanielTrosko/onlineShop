@@ -27,10 +27,6 @@ public class UserDTO {
     private String appartmentNumber;
     private boolean enabled;
 
-    private Long authoritiesId;
-    private String usernamev;
-    private String authority;
-
     public Long getId() {
         return id;
     }
@@ -126,28 +122,5 @@ public class UserDTO {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    public Long getAuthoritiesId() {
-        return authoritiesId;
-    }
-
-    public void setAuthoritiesId(Long authoritiesId) {
-        this.authoritiesId = authoritiesId;
-    }
-
-    public String getUsernamev() {
-        return usernamev;
-    }
-
-    public void setUsernamev(String usernamev) {
-        this.usernamev = usernamev;
-    }
-
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
 }
+

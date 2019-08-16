@@ -2,7 +2,6 @@ package it.danieltrosko.shop.mapper;
 
 import it.danieltrosko.shop.dto.UserDTO;
 import it.danieltrosko.shop.model.Adress;
-import it.danieltrosko.shop.model.Authorities;
 import it.danieltrosko.shop.model.User;
 
 public class UserMapper {
@@ -14,14 +13,10 @@ public class UserMapper {
         adress.setHouseNumber(userDTO.getHouseNumber());
         adress.setStreet(userDTO.getStreet());
 
-        Authorities authorities = new Authorities();
-        authorities.setId(userDTO.getAuthoritiesId());
-        authorities.setUsernamev(userDTO.getUsername());
-        authorities.setAuthority("ROLE_ADMIN");
+
 
 
         User user = new User();
-        user.setAuthorities(authorities);
         user.setId(userDTO.getId());
         user.setAdress(adress);
         user.setEmail(userDTO.getEmail());
@@ -44,10 +39,7 @@ public class UserMapper {
         userDTO.setEnabled(user.isEnabled());
 
 
-        Authorities authorities = user.getAuthorities();
-        userDTO.setAuthoritiesId(authorities.getId());
-        userDTO.setUsernamev(authorities.getUsernamev());
-        userDTO.setAuthority(authorities.getAuthority());
+
 
         Adress adress = user.getAdress();
         userDTO.setAddressId(adress.getId());
