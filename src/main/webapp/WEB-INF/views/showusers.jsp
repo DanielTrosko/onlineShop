@@ -17,7 +17,7 @@
 <div class="container">
     <div class="row">
          <div class="col"
-    <%@ include file="left.jsp" %>
+<%--    <%@ include file="left.jsp" %>--%>
 </div>
 <div class="col">
     <table class="table table-striped">

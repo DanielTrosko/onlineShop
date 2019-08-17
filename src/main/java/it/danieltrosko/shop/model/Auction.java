@@ -23,7 +23,7 @@ public class Auction {
     @NotNull
     @Column(name = "price", nullable = false)
     private int price;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "auction_user_id", nullable = false)
     @NotNull
     private User user;

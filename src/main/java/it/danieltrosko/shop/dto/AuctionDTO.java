@@ -13,6 +13,7 @@ public class AuctionDTO {
     private int year;
     @NotNull
     private int price;
+    private String description;
     private Long userId;
 
     public Long getId() {
@@ -53,6 +54,14 @@ public class AuctionDTO {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getUserId() {
