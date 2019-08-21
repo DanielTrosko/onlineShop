@@ -28,7 +28,7 @@ public class UserService {
         this.addressService = addressService;
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public void createUser(UserDTO userDTO) {
         User user = toEntity(userDTO);
         String password = user.getPassword();
@@ -54,7 +54,7 @@ public class UserService {
         userRepository.save(toEntity(userDTO));
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public void deleteUserById(Long id) {
         this.userRepository.deleteById(id);
     }

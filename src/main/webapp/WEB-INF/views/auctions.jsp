@@ -8,39 +8,49 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>Show users</title>
 
+    <title>Hello, world!</title>
 </head>
 <body>
-<h1>Users</h1>
-<div class="container">
-    <div class="row">
-        <div class="col"
-        <%--    <%@ include file="left.jsp" %>--%>
-    </div>
-    <div class="col">
-        <table class="table table-striped">
-            <tr>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>E-mail</th>
-            </tr>
-            <c:forEach items="${auctions}" var="auctions">
-                <tr>
-                    <td>${auctions.mark}</td>
-                    <td>${users.password}</td>
-                    <td>${users.name}</td>
-                    <td>${users.surname}</td>
-                    <td>${users.email}</td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
-</div>
-</div>
+<h1>Hello, world!</h1>
+
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Photo</th>
+        <th scope="col">Mark</th>
+        <th scope="col">Model</th>
+        <th scope="col">Year</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <c:forEach items="${auctions}" var="auctions">
+        <tr>
+            <th scope="row">SooN</th>
+            <td>${auctions.mark}</td>
+            <td>${auctions.model}</td>
+            <td>${auctions.year}</td>
+            <td>${auctions.price}</td>
+        </tr>
+
+    </c:forEach>
+
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

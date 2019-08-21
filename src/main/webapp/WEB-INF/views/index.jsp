@@ -1,29 +1,59 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="up.jsp" %>
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col">Image</div>
-                    <div class="col">Marka</div>
-                    <div class="col">Model</div>
-                    <div class="col">Rok</div>
-                    <div class="col">Cena</div>
-                    <div class="w-100"></div>
-                    <c:forEach items="${auctions}" var="auctions">
-                        <div class="col">SooN</div>
-                        <div class="col">auctions.getMark</div>
-                        <div class="col">auctions.getModel</div>
-                        <div class="col">auctions.getYear</div>
-                        <div class="col">auctions.getPrice</div>
-                    </c:forEach>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
-                </div>
-            </div>
+    <title>Hello, world!</title>
+</head>
+<body>
+<h1>Hello, world!</h1>
 
 
 
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+    </tr>
+    </thead>
+    <tbody>
+
+<c:forEach items="${auctions}" var="auctions">
+    <tr>
+        <th scope="row">${auctions.id}</th>
+        <td>${auctions.mark}</td>
+        <td>${auctions.model}</td>
+        <td>${auctions.year}</td>
+        <td>${auctions.price}</td>
+    </tr>
+
+</c:forEach>
+
+
+    </tbody>
+</table>
 
 
 
-<%@ include file="down.jsp" %>
+
+
+
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
