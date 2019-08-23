@@ -14,7 +14,9 @@ import java.util.List;
 public class ShopApplication {
     public static void main(String[] args) {
 
-
+    String haelko = "haselko";
+    haelko = new BCryptPasswordEncoder().encode(haelko);
+        System.out.println(haelko);
 
         SpringApplication.run(ShopApplication.class, args);
     }

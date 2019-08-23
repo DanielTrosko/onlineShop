@@ -23,4 +23,18 @@ public class AuctionService {
     public List<Auction> findALl() {
         return auctionRepository.findAll();
     }
+
+    @Transactional(readOnly = true)
+    public Auction getById(Long id){
+        return auctionRepository.getOne(id);
+    }
+
+    @Transactional
+    public void createAuction(Auction auction){
+        auctionRepository.save(auction);
+    }
+    @Transactional(readOnly = true)
+    public List<Auction> getAllByUserId(Long id){
+        return auctionRepository.findAllByUserId(id);
+    }
 }

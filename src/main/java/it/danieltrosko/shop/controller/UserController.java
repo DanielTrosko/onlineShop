@@ -8,6 +8,9 @@ import it.danieltrosko.shop.service.AuctionService;
 import it.danieltrosko.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +25,20 @@ import static it.danieltrosko.shop.mapper.UserMapper.toDTO;
 
 @Controller
 public class UserController {
-protected final Logger log = Logger.getLogger(getClass().getName());
+    protected final Logger log = Logger.getLogger(getClass().getName());
     private UserService userService;
     private AddressService addressService;
-
+    private AuctionService auctionService;
 
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuctionService auctionService) {
         this.userService = userService;
+        this.auctionService = auctionService;
     }
 
 
-//    @PreAuthorize("hasRole('ADMIN')")
+    //    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String adduser(Model model) {
         model.addAttribute("UserDTO", new UserDTO());
@@ -43,7 +47,6 @@ protected final Logger log = Logger.getLogger(getClass().getName());
 
     @PostMapping(value = "/user")
     public String createUser(@Valid @ModelAttribute("UserDTO") UserDTO userDTO, Model model) throws SQLException {
-
         if (userDTO.getId() == null) {
             this.userService.createUser(userDTO);
             log.log(Level.INFO, "Create user: " + userDTO.getUsername());
@@ -58,7 +61,10 @@ protected final Logger log = Logger.getLogger(getClass().getName());
 
     @GetMapping(value = "/admin/userlist")
     public String showUsers(Model model) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        model.addAttribute("username", context.getAuthentication().getName());
         model.addAttribute("users", this.userService.findALl());
+
         return "showusers";
     }
 
@@ -70,11 +76,25 @@ protected final Logger log = Logger.getLogger(getClass().getName());
         return "showusers";
     }
 
-    @PostMapping(value = "/editUser")
-    public String editUser(@RequestParam(required = true) Long id, Model model) {
+    @GetMapping(value = "/user/editUser")
+    public String editUser( Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long id = userService.findByUsername(auth.getName());
         model.addAttribute("UserDTO", toDTO(userService.getById(id)));
         log.log(Level.INFO, "Edit user id: " + id);
 
-        return "add_user";
+        return "/user/edit_user";
+    }
+
+    @GetMapping(value = "/login")
+    public String index() {
+        return "login";
+    }
+
+    @GetMapping(value = "/showuser")
+    public String showUser(Model model, Long id){
+        model.addAttribute("user", this.userService.getById(id));
+        model.addAttribute("userAuction", this.auctionService.getAllByUserId(id));
+        return "/user/showuser";
     }
 }

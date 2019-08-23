@@ -1,46 +1,39 @@
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-</head>
-<body>
-<h1>Hello, world!</h1>
-
-
-
+<jsp:include page="up.jsp" />
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Photo</th>
+        <th scope="col">Mark</th>
+        <th scope="col">Model</th>
+        <th scope="col">Year</th>
+        <th scope="col">Price</th>
+        <th scope="col">User</th>
     </tr>
     </thead>
     <tbody>
 
-<c:forEach items="${auctions}" var="auctions">
-    <tr>
-        <th scope="row">${auctions.id}</th>
-        <td>${auctions.mark}</td>
-        <td>${auctions.model}</td>
-        <td>${auctions.year}</td>
-        <td>${auctions.price}</td>
-    </tr>
+    <c:forEach items="${auctions}" var="auctions">
+        <tr>
+            <th scope="row">SooN</th>
+            <td>${auctions.mark}</td>
+            <td>${auctions.model}</td>
+            <td>${auctions.year}</td>
+            <td>${auctions.price}</td>
+                <%--            <td>${auctions.user.name}</td>--%>
+                <%--            <td>${auctions.user.name}</td>--%>
+            <td>  <a class="btn btn-success" href="/showuser?id=${auctions.user.id}" role="button">${auctions.user.name}</a></td>
 
-</c:forEach>
+        </tr>
+
+    </c:forEach>
 
 
     </tbody>
 </table>
+<jsp:include page="down.jsp" />
 
 
 
@@ -48,12 +41,73 @@
 
 
 
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>--%>
+
+<%--<jsp:include page="up.jsp" />--%>
+<%--<table class="table">--%>
+<%--    <thead>--%>
+<%--    <tr>--%>
+<%--        <th scope="col">Photo</th>--%>
+<%--        <th scope="col">Mark</th>--%>
+<%--        <th scope="col">Model</th>--%>
+<%--        <th scope="col">Year</th>--%>
+<%--        <th scope="col">Price</th>--%>
+<%--        <th scope="col">User</th>--%>
+<%--    </tr>--%>
+<%--    </thead>--%>
+<%--    <tbody>--%>
+<%--<c:forEach items="${auctions}" var="auctions">--%>
+<%--    <tr>--%>
+<%--        <th scope="row">SooN</th>--%>
+<%--        <td>${auctions.mark}</td>--%>
+<%--        <td>${auctions.model}</td>--%>
+<%--        <td>${auctions.year}</td>--%>
+<%--        <td>${auctions.price}</td>--%>
+<%--        <td>${auctions.user.name}</td>--%>
+<%--    </tr>--%>
+
+<%--</c:forEach>--%>
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+<%--    </tbody>--%>
+<%--</table>--%>
+
+<%--<jsp:include page="down.jsp" />--%>
+
+<%--&lt;%&ndash;<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<jsp:include page="up.jsp" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;<table class="table">&ndash;%&gt;--%>
+<%--&lt;%&ndash;    <thead>&ndash;%&gt;--%>
+<%--&lt;%&ndash;    <tr>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <th scope="col">Photo</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <th scope="col">Mark</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <th scope="col">Model</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <th scope="col">Year</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <th scope="col">Price</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <th scope="col">User</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;    </tr>&ndash;%&gt;--%>
+<%--&lt;%&ndash;    </thead>&ndash;%&gt;--%>
+<%--&lt;%&ndash;    <tbody>&ndash;%&gt;--%>
+
+<%--&lt;%&ndash;    <c:forEach items="${auctions}" var="auctions">&ndash;%&gt;--%>
+<%--&lt;%&ndash;        <tr>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <th scope="row">SooN</th>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <td>${auctions.mark}</td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <td>${auctions.model}</td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <td>${auctions.year}</td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <td>${auctions.price}</td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;            <td>${auctions.user.name}</td>&ndash;%&gt;--%>
+<%--&lt;%&ndash;        </tr>&ndash;%&gt;--%>
+
+<%--&lt;%&ndash;    </c:forEach>&ndash;%&gt;--%>
+
+
+<%--&lt;%&ndash;    </tbody>&ndash;%&gt;--%>
+<%--&lt;%&ndash;</table>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<jsp:include page="down.jsp" />&ndash;%&gt;--%>
+
+
+
+
+

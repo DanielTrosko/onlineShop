@@ -2,16 +2,19 @@ package it.danieltrosko.shop.controller;
 
 import it.danieltrosko.shop.dto.AuctionDTO;
 import it.danieltrosko.shop.model.Auction;
+import it.danieltrosko.shop.model.User;
 import it.danieltrosko.shop.repository.AuctionRepository;
 import it.danieltrosko.shop.service.AuctionService;
+import it.danieltrosko.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -19,24 +22,65 @@ public class AuctionController {
 
 
     private AuctionService auctionService;
+    private UserService userService;
 
     @Autowired
-    public AuctionController(AuctionService auctionService) {
+    public AuctionController(AuctionService auctionService, UserService userService) {
         this.auctionService = auctionService;
+        this.userService = userService;
     }
 
 
 
 
     @GetMapping(value = "/auctions")
-    public String index(Model model) {
+    public String showAuctions(Model model) {
         model.addAttribute("auctions", this.auctionService.findALl());
         return "auctions";
     }
 
-    @RequestMapping(value = "/addauction", method = RequestMethod.GET)
-    public String createAuction(Model model){
-        model.addAttribute("AuctionDTO", new AuctionDTO());
+    @GetMapping(value = "/")
+    public String index(Model model) {
+        model.addAttribute("auctions", this.auctionService.findALl());
+        return "index";
+    }
+
+    @GetMapping(value = "/addauctions")
+    public String addAuction(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long id = this.userService.findByUsername(auth.getName());
+        model.addAttribute("Auction", new Auction());
+        model.addAttribute("user", this.userService.getById(id));
         return "add_auction";
+    }
+
+    @PostMapping(value = "/auction")
+    public String createAuction(Auction auction, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.getById(this.userService.findByUsername(auth.getName()));
+        auction.setUser(user);
+        this.auctionService.createAuction(auction);
+        Long id = auction.getUser().getId();
+        model.addAttribute("auctions",this.auctionService.getAllByUserId(id));
+        return "myauction";
+    }
+
+    @GetMapping(value = "/showauction")
+    public String showAuction(Long id, Model model){
+        model.addAttribute("auction", this.auctionService.getById(id));
+        return "showauction";
+    }
+
+    @GetMapping(value = "/test")
+    public String test(){
+        return "test";
+    }
+
+    @GetMapping(value = "/myauctions")
+    public String showMyAuctions(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long id = this.userService.findByUsername(auth.getName());
+        model.addAttribute("auctions", this.auctionService.getAllByUserId(id));
+        return "myauction";
     }
 }

@@ -28,7 +28,7 @@ public class User {
     @Email(message = "Email must be valid")
     @Column(name = "email", nullable = false)
     private String email;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_address_id", nullable = false)
     @NotNull
     private Adress adress;

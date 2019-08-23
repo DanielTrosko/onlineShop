@@ -59,6 +59,15 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
+
+    @Transactional
+    public Long findByUsername(String username){
+        User user = this.userRepository.findByUsername(username);
+        return user.getId();
+    }
+
+
+
     @Transactional
     public void insertWithQuery(String username) {
         entityManager.createNativeQuery("INSERT INTO `authorities`(`username`, `authority`) VALUES (?,'ROLE_USER')")
