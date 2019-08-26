@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="up.jsp" />
+<jsp:include page="../up.jsp" />
 <table class="table">
     <thead>
     <tr>
@@ -20,8 +20,6 @@
             <td>${auctions.model}</td>
             <td>${auctions.year}</td>
             <td>${auctions.price}</td>
-<%--            <td>${auctions.user.name}</td>--%>
-<%--            <td>${auctions.user.name}</td>--%>
           <td>  <a class="btn btn-success" href="/showuser?id=${auctions.user.id}" role="button">${auctions.user.name}</a></td>
 
         </tr>
@@ -31,7 +29,7 @@
 
     </tbody>
 </table>
-<jsp:include page="down.jsp" />
+<jsp:include page="../down.jsp" />
 
 
 

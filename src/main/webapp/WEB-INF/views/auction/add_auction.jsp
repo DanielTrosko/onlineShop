@@ -1,6 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<jsp:include page="up.jsp" />
+<jsp:include page="../up.jsp" />
 
     <%--@elvariable id="Auction" type="it.danieltrosko.shop.model.Auction"--%>
     <form:form method="POST" action="/auction" modelAttribute="Auction">
@@ -26,4 +26,4 @@
 
         <form:button type="submit" class="btn btn-primary" value="Submit">Register</form:button>
     </form:form>
-<jsp:include page="down.jsp" />
+<jsp:include page="../down.jsp" />

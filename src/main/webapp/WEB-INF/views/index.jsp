@@ -22,9 +22,7 @@
             <td>${auctions.model}</td>
             <td>${auctions.year}</td>
             <td>${auctions.price}</td>
-                <%--            <td>${auctions.user.name}</td>--%>
-                <%--            <td>${auctions.user.name}</td>--%>
-            <td>  <a class="btn btn-success" href="/showuser?id=${auctions.user.id}" role="button">${auctions.user.name}</a></td>
+            <td>  <a class="btn btn-success" href="/showuser?id=${auctions.userId}" role="button">User</a></td>
 
         </tr>
 

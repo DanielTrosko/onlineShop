@@ -28,8 +28,6 @@ public class AuctionMapper {
         auctionDTO.setYear(auction.getYear());
         auctionDTO.setPrice(auction.getPrice());
 
-        User user = auction.getUser();
-        auctionDTO.setUserId(user.getId());
         return auctionDTO;
     }
 }

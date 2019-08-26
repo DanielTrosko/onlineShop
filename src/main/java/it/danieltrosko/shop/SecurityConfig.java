@@ -1,5 +1,6 @@
 package it.danieltrosko.shop;
 
+import org.apache.catalina.filters.RestCsrfPreventionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,10 +12,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
+
+    protected final Logger log = Logger.getLogger(getClass().getName());
 
     @Autowired
     private DataSource dataSource;
@@ -27,11 +32,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username, authority from authorities where username=?")
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
-//.anyRequest().hasAnyRole("USER","ADMIN")
+//.hasRole("USER")
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().hasAnyRole("USER","ADMIN")
+        http
+                .authorizeRequests()
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .and()
+                .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .authorizeRequests().antMatchers("/login**").permitAll()
                 .and()
@@ -42,9 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .successHandler((req,res,auth)->{
                     for (GrantedAuthority authority : auth.getAuthorities()) {
-                        System.out.println(authority.getAuthority());
+                        log.log(Level.INFO, "Logged in: " + auth.getName() + "  as: " + authority.getAuthority());
                     }
-                    System.out.println(auth.getName());
                     res.sendRedirect("/");
                 })
                 .failureHandler((req,res,exp)->{

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="up.jsp" />
+<jsp:include page="../up.jsp" />
 
 <table class="table table-hover">
     <thead class="thead-dark">
@@ -28,4 +28,4 @@
     </tbody>
 </table>
 
-<jsp:include page="down.jsp" />
+<jsp:include page="../down.jsp" />

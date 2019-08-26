@@ -1,8 +1,12 @@
+<%@ page import="org.springframework.security.core.Authentication" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,26 +18,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+
 <section class="navigation">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Soon</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Soon</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href='<spring:url value="/signout"/>'>Logout</a>
-                </li>
+                <sec:authorize access="!isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href='<spring:url value="/login"/>'>Sign in</a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href='<spring:url value="/signout"/>'>Logout</a>
+                    </li>
+                </sec:authorize>
             </ul>
         </div>
     </nav>
@@ -47,9 +51,22 @@
 
                 <div class="list-group">
                     <a href="/auctions" class="list-group-item list-group-item-action active">Auctions</a>
-                    <a href="/myauctions" class="list-group-item list-group-item-action">My auctions</a>
-                    <a href="/addauctions" class="list-group-item list-group-item-action">Add auction</a>
+                    <a href="/user/myauctions" class="list-group-item list-group-item-action">My auctions</a>
+                    <a href="/user/addauctions" class="list-group-item list-group-item-action">Add auction</a>
                     <a href="/user/editUser" class="list-group-item list-group-item-action">Settings</a>
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <a href="/admin/userlist" class="list-group-item list-group-item-action">User List</a>
+                        <a href="/admin/deleteUser" class="list-group-item list-group-item-action">Delete User</a>
+                    </sec:authorize>
+
+
+
+<%--                    <sec:authentication property="principal.authorities" var="authorities" />--%>
+<%--                    <c:forEach items="${authorities}" var="authority" varStatus="vs">--%>
+<%--                        <p>${authority.authority}</p>--%>
+<%--                    </c:forEach>--%>
+
+
                 </div>
 
             </div>

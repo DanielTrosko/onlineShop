@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="up.jsp" />
+<jsp:include page="../up.jsp" />
 <table class="table table-bordered">
     <tbody>
     <c:forEach items="${auctions}" var="auctions">
@@ -12,9 +12,14 @@
         </tr>
 
     </c:forEach>
+    <fieldset>
+        <legend>Opis</legend>
+        ${auctions.description}
+    </fieldset>
+
 
     </tbody>
 </table>
 
 
-<jsp:include page="down.jsp" />
+<jsp:include page="../down.jsp" />

@@ -42,7 +42,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String adduser(Model model) {
         model.addAttribute("UserDTO", new UserDTO());
-        return "add_user";
+        return "/user/add_user";
     }
 
     @PostMapping(value = "/user")
@@ -56,7 +56,7 @@ public class UserController {
         }
 
         model.addAttribute("users", this.userService.findALl());
-        return "showusers";
+        return "/user/showusers";
     }
 
     @GetMapping(value = "/admin/userlist")
@@ -65,7 +65,7 @@ public class UserController {
         model.addAttribute("username", context.getAuthentication().getName());
         model.addAttribute("users", this.userService.findALl());
 
-        return "showusers";
+        return "/user/showusers";
     }
 
     @PostMapping(value = "/admin/deleteUser")
@@ -73,7 +73,7 @@ public class UserController {
         this.userService.deleteUserById(id);
         model.addAttribute("users", this.userService.findALl());
         log.log(Level.INFO, "Delete user id: " + id);
-        return "showusers";
+        return "/user/showusers";
     }
 
     @GetMapping(value = "/user/editUser")

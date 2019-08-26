@@ -37,4 +37,9 @@ public class AuctionService {
     public List<Auction> getAllByUserId(Long id){
         return auctionRepository.findAllByUserId(id);
     }
+
+    @Transactional
+    public void delete(Long id){
+        auctionRepository.deleteById(id);
+    }
 }
